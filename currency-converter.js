@@ -7,8 +7,10 @@ const getExchangeRate = (fromCurrency, toCurrency) => {
     )
     .then((response) => {
       const rate = response.data.rates;
+      const euro = 1 / rate[fromCurrency];
+      const exchangeRate = euro * rate[toCurrency];
 
-      console.log(rate);
+      console.log(exchangeRate);
     });
 };
 
