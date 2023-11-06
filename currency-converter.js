@@ -19,7 +19,7 @@ const getCountries = async (toCurrency) => {
     `https://restcountries.com/v3.1/currency/${toCurrency}`
   );
 
-  console.log(response.data);
+  response.data.map((country) => console.log(country.name));
 };
 
 getCountries("USD");
