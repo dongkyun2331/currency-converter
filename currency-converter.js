@@ -21,16 +21,16 @@ const getExchangeRate = async (fromCurrency, toCurrency) => {
 
 // 2번 함수 - 국가 목록 가져오기
 const getCountries = async (toCurrency) => {
-  const response = await axios.get(
-    `https://restcountries.com/v3.1/currency/${toCurrency}`
-  );
+  try {
+    const response = await axios.get(
+      `https://restcountries.com/v3.1/currency/${toCurrency}`
+    );
 
-  const countriesData = response.data;
-
-  // 응답에서 국가 이름 추출
-  const countries = countriesData.map((country) => country.name.common);
-
-  return countries;
+    // 응답에서 국가 이름 추출
+    return response.data.map((country) => country.name.common);
+  } catch (error) {
+    throw new Error(`${toCurrency}를 사용하는 국가를 얻을 수 없습니다.`);
+  }
 };
 
 // 3번 함수 - 통화 변환
