@@ -43,7 +43,7 @@ const convertCurrency = async (fromCurrency, toCurrency, amount) => {
 };
 
 // 의미 있는 데이터를 얻기 위해 convertCurrency 호출
-convertCurrency("KRW", "USD", 100)
+convertCurrency("USD", "KRW", 100)
   .then((message) => {
     console.log(message);
   })
