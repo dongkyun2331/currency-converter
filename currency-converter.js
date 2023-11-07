@@ -1,3 +1,17 @@
+// 이벤트 핸들러 등록
+document
+  .getElementById("conversion-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // 폼 제출 이벤트의 기본 동작을 중지
+
+    const fromCurrency = document.getElementById("fromCurrency").value;
+    const toCurrency = document.getElementById("toCurrency").value;
+    const amount = parseFloat(document.getElementById("amount").value);
+
+    // 사용자로부터 입력을 받아 convertCurrency 함수 호출
+    convertCurrency(fromCurrency, toCurrency, amount);
+  });
+
 // 1번 함수 - 환율 가져오기
 const getExchangeRate = async (fromCurrency, toCurrency) => {
   const response = await axios.get(
@@ -44,4 +58,4 @@ const convertCurrency = async (fromCurrency, toCurrency, amount) => {
 };
 
 // 페이지 로딩 시 통화 변환 함수 호출
-convertCurrency("USD", "KRW", 100);
+convertCurrency("USD", "KRW", 1);
