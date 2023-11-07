@@ -10,6 +10,12 @@ const getExchangeRate = async (fromCurrency, toCurrency) => {
   const customCurrencyRate = 1 / rate[fromCurrency];
   const exchangeRate = customCurrencyRate * rate[toCurrency];
 
+  if (isNaN(exchangeRate)) {
+    throw new Error(
+      `통화 정보를 가져올 수 없습니다: ${fromCurrency} 및 ${toCurrency}`
+    );
+  }
+
   return exchangeRate;
 };
 
@@ -37,6 +43,10 @@ const convertCurrency = async (fromCurrency, toCurrency, amount) => {
 };
 
 // 의미 있는 데이터를 얻기 위해 convertCurrency 호출
-convertCurrency("KRW", "USD", 100).then((message) => {
-  console.log(message);
-});
+convertCurrency("KRW", "USD", 100)
+  .then((message) => {
+    console.log(message);
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
