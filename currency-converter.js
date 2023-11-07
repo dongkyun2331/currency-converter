@@ -1,5 +1,3 @@
-const axios = require("axios");
-
 // 1번 함수 - 환율 가져오기
 const getExchangeRate = async (fromCurrency, toCurrency) => {
   const response = await axios.get(
@@ -39,14 +37,11 @@ const convertCurrency = async (fromCurrency, toCurrency, amount) => {
   const countries = await getCountries(fromCurrency);
   const convertedAmount = (amount * exchangeRate).toFixed(2);
 
-  return `${amount} ${fromCurrency}은(는) ${convertedAmount} ${toCurrency}로 가치가 있으며, 다음 국가에서 사용할 수 있습니다: ${countries}`;
+  const result = `${amount} ${fromCurrency}은(는) ${convertedAmount} ${toCurrency}로 가치가 있으며, 다음 국가에서 사용할 수 있습니다: ${countries}`;
+
+  // 결과를 화면에 표시하는 함수
+  document.getElementById("result").innerText = result;
 };
 
-// 의미 있는 데이터를 얻기 위해 convertCurrency 호출
-convertCurrency("USD", "KRW", 100)
-  .then((message) => {
-    console.log(message);
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });
+// 페이지 로딩 시 통화 변환 함수 호출
+convertCurrency("USD", "KRW", 100);
