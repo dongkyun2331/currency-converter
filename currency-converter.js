@@ -15,12 +15,11 @@ document
 // 1번 함수 - 환율 가져오기
 const getExchangeRate = async (fromCurrency, toCurrency) => {
   const response = await axios.get(
-    "http://data.fixer.io/api/latest?access_key=1edd5466135e2c9bc8c3026a21bb5fbe"
+    `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`
   );
 
   const rate = response.data.rates;
-  const customCurrencyRate = 1 / rate[fromCurrency];
-  const exchangeRate = customCurrencyRate * rate[toCurrency];
+  const exchangeRate = rate[toCurrency];
 
   if (isNaN(exchangeRate)) {
     throw new Error(
